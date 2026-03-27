@@ -20,6 +20,11 @@ const HealthAccess = () => {
       return;
     }
 
+    if (!FLASK_API_URL) {
+      setAiRecommendation("Flask API URL is missing. Set VITE_FLASK_API_URL in Vercel Environment Variables.");
+      return;
+    }
+
     setLoading(true);
     setAiRecommendation("");
 
@@ -36,9 +41,15 @@ const HealthAccess = () => {
         }),
       });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
       if (!response.ok) {
-        throw new Error(data.error || "Request failed");
+        throw new Error(data.error || `Request failed with status ${response.status}`);
       }
 
       if (data.result) {

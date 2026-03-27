@@ -33,6 +33,11 @@ const EyeDetection = () => {
       return;
     }
 
+    if (!API_BASE_URL) {
+      setError("Flask API URL is missing. Set VITE_FLASK_API_URL in Vercel Environment Variables.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -45,9 +50,15 @@ const EyeDetection = () => {
         body: formData,
       });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
       if (!response.ok) {
-        throw new Error(data.error || "Prediction request failed");
+        throw new Error(data.error || `Prediction request failed with status ${response.status}`);
       }
 
       const disease = data.prediction;
