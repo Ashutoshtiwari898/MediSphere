@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+</head>
+<body>
+
+<h1>Prediction Result</h1>
+
+<p><strong>Detected Type:</strong> {{ cancer_type }}</p>
+<p><strong>Confidence:</strong> {{ confidence }}%</p>
+
+<h3>All Probabilities:</h3>
+<ul>
+    {% for label, prob in details.items() %}
+        <li>{{ label }}: {{ prob }}%</li>
+    {% endfor %}
+</ul>
+
+<a href="/">Upload another image</a>
+
+</body>
+</html>

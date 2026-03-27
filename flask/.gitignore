@@ -1,0 +1,14 @@
+env/
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Runtime-generated files
+uploads/
+*.log

@@ -1,0 +1,42 @@
+# Global OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python environments and caches
+.venv/
+venv/
+**/.venv/
+**/venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Node artifacts
+**/node_modules/
+**/dist/
+**/build/
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+
+# Flask runtime outputs
+flask/uploads/
+
+# Deep learning datasets and training artifacts
+flask/dataset/train/
+flask/dataset/test/
+flask/dataset/valid/
+flask/dataset/*.h5
+flask/Training_history.pkl
+
+# Optional: keep model binaries out of git by default (use releases or LFS)
+# Uncomment if needed:
+# flask/*.h5
+# flask/*.keras
+# flask/dataset/*.h5
