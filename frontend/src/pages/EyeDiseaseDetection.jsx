@@ -7,8 +7,9 @@ const EyeDetection = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL =
-    import.meta.env.VITE_FLASK_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:5000" : "");
+  const apiBaseUrl =
+    (import.meta.env.VITE_FLASK_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:5000" : ""))
+      .replace(/\/+$/, "");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -33,7 +34,7 @@ const EyeDetection = () => {
       return;
     }
 
-    if (!API_BASE_URL) {
+    if (!apiBaseUrl) {
       setError("Flask API URL is missing. Set VITE_FLASK_API_URL in Vercel Environment Variables.");
       return;
     }
@@ -45,7 +46,7 @@ const EyeDetection = () => {
       const formData = new FormData();
       formData.append("image", selectedFile);
 
-      const response = await fetch(`${API_BASE_URL}/predict`, {
+      const response = await fetch(`${apiBaseUrl}/predict`, {
         method: "POST",
         body: formData,
       });

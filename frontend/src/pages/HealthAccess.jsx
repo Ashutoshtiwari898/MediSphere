@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 const HealthAccess = () => {
-  const FLASK_API_URL =
-    import.meta.env.VITE_FLASK_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:5000" : "");
+  const flaskApiBaseUrl =
+    (import.meta.env.VITE_FLASK_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:5000" : ""))
+      .replace(/\/+$/, "");
   const [patientName, setPatientName] = useState("");
   const [age, setAge] = useState("");
   const [symptoms, setSymptoms] = useState("");
@@ -20,7 +21,7 @@ const HealthAccess = () => {
       return;
     }
 
-    if (!FLASK_API_URL) {
+    if (!flaskApiBaseUrl) {
       setAiRecommendation("Flask API URL is missing. Set VITE_FLASK_API_URL in Vercel Environment Variables.");
       return;
     }
@@ -29,7 +30,7 @@ const HealthAccess = () => {
     setAiRecommendation("");
 
     try {
-      const response = await fetch(`${FLASK_API_URL}/recommend`, {
+      const response = await fetch(`${flaskApiBaseUrl}/recommend`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

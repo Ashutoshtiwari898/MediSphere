@@ -8,7 +8,10 @@ const AppContextProvider = (props) => {
 
     const currencySymbol = "$"
     const [doctors, setDoctors] = useState([])
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? 'http://localhost:3000' : '')
+    const backendUrlFromEnv = import.meta.env.VITE_BACKEND_URL || (import.meta.env.DEV ? 'http://localhost:3000' : '')
+    const backendUrl = backendUrlFromEnv
+        .replace(/\/+$/, '')
+        .replace(/\/api$/, '')
     const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "");
     const [userData, setUserData] = useState(false)
 
