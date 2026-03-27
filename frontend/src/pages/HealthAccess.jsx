@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 const HealthAccess = () => {
-  const FLASK_API_URL = import.meta.env.VITE_FLASK_API_URL || "http://127.0.0.1:5000";
+  const FLASK_API_URL =
+    import.meta.env.VITE_FLASK_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:5000" : "");
   const [patientName, setPatientName] = useState("");
   const [age, setAge] = useState("");
   const [symptoms, setSymptoms] = useState("");

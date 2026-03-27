@@ -7,7 +7,8 @@ const EyeDetection = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL = import.meta.env.VITE_FLASK_API_URL || "http://127.0.0.1:5000";
+  const API_BASE_URL =
+    import.meta.env.VITE_FLASK_API_URL || (import.meta.env.DEV ? "http://127.0.0.1:5000" : "");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
